@@ -5,14 +5,19 @@ const errorApi = document.getElementById('error-message');
 errorApi.style.display = 'none';
 const noResult = document.getElementById('no-result');
 noResult.style.display = 'none';
-
+// loading animation
+const spinner = document.getElementById('spinner');
+spinner.style.display = 'none';
 document.getElementById('button-addon2').addEventListener('click', async () => {
+  spinner.style.display = 'block';
+noResult.style.display = 'none'
   const searchField = document.getElementById('search-field');
   const searchText = searchField.value;
   // clear input value
   searchField.value = '';
   if (searchText == '') {
     error.style.display = 'block';
+    spinner.style.display = 'none';
   } else {
     error.style.display = 'none';
     try {
@@ -22,6 +27,7 @@ document.getElementById('button-addon2').addEventListener('click', async () => {
       displayMeal(data.meals);
     } catch (err) {
       errorApi.style.display = 'block';
+      spinner.style.display = 'none';
     }
   }
 });
@@ -31,6 +37,7 @@ const displayMeal = (meals) => {
   mealContainer.textContent = '';
   if (meals == null) {
     noResult.style.display = 'block';
+    spinner.style.display = 'none';
   } else {
     meals.forEach((meal) => {
       noResult.style.display = 'none';
@@ -47,11 +54,15 @@ const displayMeal = (meals) => {
     </div>
     `;
       mealContainer.appendChild(div);
+      if (mealContainer.textContent != null) {
+        spinner.style.display = 'none';
+      }
     });
   }
 };
 // single meal load
 const loadMealDetails = async (mealId) => {
+  spinner.style.display = 'block';
   const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
   const res = await fetch(url);
   const data = await res.json();
@@ -73,4 +84,7 @@ const displayMealDetails = (meal) => {
   </div>
   `;
   mealDetails.appendChild(div);
+  if (mealDetails.textContent != null) {
+    spinner.style.display = 'none';
+  }
 };
