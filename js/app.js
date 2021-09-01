@@ -1,3 +1,5 @@
+const mealContainer = document.getElementById('search-result');
+mealContainer.style.display = 'block';
 // error
 const error = document.getElementById('error');
 error.style.display = 'none';
@@ -9,8 +11,10 @@ noResult.style.display = 'none';
 const spinner = document.getElementById('spinner');
 spinner.style.display = 'none';
 document.getElementById('button-addon2').addEventListener('click', async () => {
+mealContainer.style.display = 'none';
+
   spinner.style.display = 'block';
-noResult.style.display = 'none'
+  noResult.style.display = 'none';
   const searchField = document.getElementById('search-field');
   const searchText = searchField.value;
   // clear input value
@@ -33,7 +37,6 @@ noResult.style.display = 'none'
 });
 //  meal display cards
 const displayMeal = (meals) => {
-  const mealContainer = document.getElementById('search-result');
   mealContainer.textContent = '';
   if (meals == null) {
     noResult.style.display = 'block';
@@ -54,9 +57,9 @@ const displayMeal = (meals) => {
     </div>
     `;
       mealContainer.appendChild(div);
-      if (mealContainer.textContent != null) {
+      mealContainer.style.display = 'block';
         spinner.style.display = 'none';
-      }
+
     });
   }
 };
