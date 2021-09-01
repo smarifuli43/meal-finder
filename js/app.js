@@ -1,5 +1,5 @@
 const mealContainer = document.getElementById('search-result');
-mealContainer.style.display = 'block';
+mealContainer.style.display = 'flex';
 // error
 const error = document.getElementById('error');
 error.style.display = 'none';
@@ -57,7 +57,7 @@ const displayMeal = (meals) => {
     </div>
     `;
       mealContainer.appendChild(div);
-      mealContainer.style.display = 'block';
+      mealContainer.style.display = 'flex';
         spinner.style.display = 'none';
 
     });
